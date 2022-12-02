@@ -17,8 +17,8 @@ module "vpc-default" {
 */
 
 module "vpc-dev" {
-  source = "../modules/aws_network"
-  //  source               = "git@github.com:adv4000/terraform-modules.git//aws_network"
+  //source = "../modules/aws_network"
+  source               = "github.com/Dmitry-Yemelin/terraform-modules//aws_network"
   env                  = "dev"
   vpc_cidr             = "10.100.0.0/16"
   public_subnet_cidrs  = ["10.100.1.0/24", "10.100.2.0/24"]
