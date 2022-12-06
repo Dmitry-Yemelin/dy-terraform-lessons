@@ -9,15 +9,16 @@
 #==============================================================
 
 resource "aws_security_group" "my_SG" {
-  name = "Dynamic Security Group"
-
+  name   = "Dynamic Security Group"
+  vpc_id = var.vpc_id
   dynamic "ingress" {
-    for_each = lookup(var.allow_port_list, var.env)
+    for_each = var.allow_port_list
     content {
-      from_port   = ingress.value
-      to_port     = ingress.value
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+      #cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = var.ingress_cidr_blocks
     }
   }
   egress {
